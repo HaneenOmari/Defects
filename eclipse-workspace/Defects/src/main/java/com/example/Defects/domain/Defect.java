@@ -4,14 +4,14 @@ import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 
 @Entity
-public class Deffect {
+public class Defect {
 
 	@Id
 	private String Def_id;
 	private String severity,error_code;
 	private String id_sol;
 	
-	public Deffect(String def_id, String severity, String error_code, String id_sol) {
+	public Defect(String def_id, String severity, String error_code, String id_sol) {
 		super();
 		Def_id = def_id;
 		this.severity = severity;
@@ -19,7 +19,7 @@ public class Deffect {
 		this.id_sol = id_sol;
 	}
 	
-	public Deffect() {
+	public Defect() {
 		
 	}
 

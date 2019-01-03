@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class DeffectInstance {
+public class DefectInstance {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -14,11 +14,11 @@ public class DeffectInstance {
 	private String app_id,def_id;
 	private long id_log;
 	
-	public DeffectInstance() {
+	public DefectInstance() {
 		super();
 	}
 	
-	public DeffectInstance(long id_Auto, String app_id, String def_id, long id_log) {
+	public DefectInstance(long id_Auto, String app_id, String def_id, long id_log) {
 		super();
 		this.id_Auto = id_Auto;
 		this.app_id = app_id;

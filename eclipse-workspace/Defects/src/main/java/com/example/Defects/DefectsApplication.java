@@ -10,12 +10,12 @@ import com.cmserver.ar.Defects;
 import com.cmserver.ar.Reader;
 import com.cmserver.ar.Writer;
 import com.example.Defects.domain.App;
-import com.example.Defects.domain.DefectRepository;
+import com.example.Defects.domain.AppRepository;
 
 @SpringBootApplication
 public class DefectsApplication {
 	@Autowired
-	private DefectRepository repository;
+	private AppRepository repository;
 
 	private static ArrayList<Defects> defectsList;
 
@@ -28,11 +28,13 @@ public class DefectsApplication {
 		Writer writer = Reader.extracted("CMServer.20170924_1557.log");
 		defectsList = writer.getDefectsList();
 		return args -> {
-			int i = 0;
+			int id = 0;int i;
 			for(Defects defect : defectsList ) {
-				App app = new App(defect.getApp() + i,defect.getCode(),defect.getSeverity());
+			//	App app = new App(defect.getApp() + i,defect.getCode(),defect.getSeverity());
+				i=defect.getApp().indexOf(" ");
+				App app = new App(id+" ",defect.getApp().substring(0, i),defect.getApp().substring(i+1,(defect.getApp().length()) ));
 				repository.save(app);
-				i++;
+				id++;
 			}
 		};
 	}

@@ -2,7 +2,7 @@ package com.example.Defects.domain;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface DefectRepository extends CrudRepository<App, Long>{
+public interface AppRepository extends CrudRepository<App, Long>{
 
 
 }
