@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Home Page</title>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+  border-right:1px solid #bbb;
+}
+
+li a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.active {
+
+ background-color:  #d1d1ba;
+  color: white;
+  
+}
+
+
+h2{
+  text-align: center;
+}
+#d1 {
+  width:33%;
+
+  
+  float:left;
+  border-style:double;  
+  margin: 2px;
+    
+}
+#d0 {
+  width:33%; 
+  float:left; 
+   border-style:double;
+    margin: 2px;
+  
+
+  
+}
+#d2 {
+  width:33%;
+  float:left;    border-style:double;
+     margin: 2px;
+      
+   
+  
+}
+#amdocsIcon{
+height: 100%;
+}
+
+</style>
+
+
+<script type="text/javascript">
+function showpie(){
+	var chart = new CanvasJS.Chart("chartContainer",
+			{
+				title:{
+					text: "Defects by App Pie"
+				},
+				legend: {
+					maxWidth: 350,
+					itemWidth: 120
+				},
+				data: [
+				{
+				type: "pie",
+					showInLegend: true,
+					legendText: "{indexLabel}",
+					dataPoints: [
+						{ y: 10, indexLabel: "CGN" },	{ y: 20, indexLabel: "BLM" },	
+						{ y: 5, indexLabel: "CM" },	
+				//		{ y: 9, indexLabel: "Givaat Habiba"},
+					//	{ y: 15, indexLabel: "ishi" },	{ y: 35, indexLabel: "ishi thani"},		
+//{ y: 20, indexLabel: "Server side"}
+					]
+				}
+
+				]
+
+			});
+
+			chart.render();
+		}
+
+
+
+
+function showArray(){
+	data=[{SeqID:1,App:"CGN Cus",Code:"000004",Severity:"iconC",Description:"some error description",Solution:"solution description"},{SeqID:2,App:"BLM Cus",Code:"000014",Severity:"iconW",Description:"some error description",Solution:"solution description"}];
+data1=[{App:"CGN Core",DefNum:112,Def:40},{App:"BLM Cus",DefNum:75,Def:27}];
+data2=[{Severity:"iconC",DefNum:150,Def:40},{Severity:"iconW",DefNum:92,Def:27}];
+	s="<tr><th>SeqID<th>App<th>Code<th>Severity<th>Description<th>Solution"
+	
+	var i;
+	for(i=0;i<data.length;i++)
+	{
+		s+="<tr><td>"+data[i].SeqID+"<td>"+data[i].App +"<td>"+data[i].Code+"<td>"+data[i].Severity +"<td>"+data[i].Description +"<td>"+data[i].Solution ;
+			
+	}
+	t1=document.getElementById("t1");
+	t1.innerHTML=s;
+	d="<tr><th>App<th>DefNum<th>Def"
+
+	for(i=0;i<data1.length;i++)
+	{
+		d+="<tr><td>"+data1[i].App+"<td>"+data1[i].DefNum +"<td>"+data1[i].Def ;
+			
+	}
+	t2=document.getElementById("t2");
+	t2.innerHTML=d;
+	
+	
+	
+	d="<tr><th>Severity<th>DefNum<th>Def"
+
+		for(i=0;i<data2.length;i++)
+		{
+			d+="<tr><td>"+data2[i].Severity+"<td>"+data2[i].DefNum +"<td>"+data2[i].Def ;
+				
+		}
+		t2=document.getElementById("t3");
+		t2.innerHTML=d;
+}
+	
+function show(){
+var chart = new CanvasJS.Chart("a", {
+	animationEnabled: true,
+	title:{
+		text: "Weekly view of Defects by App",
+		fontFamily: "arial black",
+		fontColor: "#695A42"
+	},
+	axisX: {
+		interval: 1,
+		intervalType: "day"
+	},
+	axisY:{
+		valueFormatString:"",
+		gridColor: "#B6B1A8",
+		tickColor: "#B6B1A8"
+	},
+	toolTip: {
+		shared: true,
+		content: toolTipContent
+	},
+	data: [{
+		type: "stackedColumn",
+		showInLegend: true,
+		color: "#696661",
+		name: "Q1",
+		dataPoints: [
+			{ y: 6, x: new Date("2019/01/01") },
+			{ y: 8, x: new Date("2019/01/02")  },
+			{ y: 10, x: new Date("2019/01/03") },
+			{ y: 13, x: new Date("2019/01/04")  },
+			{ y: 15, x: new Date("2019/01/05")  },
+			{ y: 17, x: new Date("2019/01/06")  }
+	
+		]
+		},
+		{        
+			type: "stackedColumn",
+			showInLegend: true,
+			name: "Q2",
+			color: "#EDCA93",
+			dataPoints: [
+				{ y: 6, x: new Date("2019/01/01") },
+				{ y: 9, x: new Date("2019/01/02")},
+				{ y: 11, x: new Date("2019/01/03")},
+				{ y: 14, x: new Date("2019/01/04")},
+				{ y: 15, x: new Date("2019/01/05") },
+				{ y: 17, x: new Date("2019/01/06") }
+			
+			]
+		},
+		{        
+			type: "stackedColumn",
+			showInLegend: true,
+			name: "Q3",
+			color: "#695A42",
+			dataPoints: [
+				{ y: 7, x: new Date("2019/01/01") },
+				{ y: 9, x: new Date("2019/01/02") },
+				{ y: 13, x: new Date("2019/01/03")},
+				{ y: 14, x: new Date("2019/01/04")},
+				{ y: 18, x: new Date("2019/01/05")},
+				{ y: 18, x: new Date("2019/01/06") }
+			
+			]
+		},
+		{        
+			type: "stackedColumn",
+			showInLegend: true,
+			name: "Q4",
+			color: "#B6B1A8",
+			dataPoints: [
+				{ y: 8, x: new Date("2019/01/01") },
+				{ y: 10, x: new Date("2019/01/02")},
+				{ y: 14, x: new Date("2019/01/03") },
+				{ y: 16, x: new Date("2019/01/04") },
+				{ y: 10, x: new Date("2019/01/05") },
+				{ y: 21, x: new Date("2019/01/06") }
+			]
+	}]
+});
+chart.render();
+
+function toolTipContent(e) {
+	var str = "";
+	var total = 0;
+	var str2, str3;
+	for (var i = 0; i < e.entries.length; i++){
+		var  str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\"> "+e.entries[i].dataSeries.name+"</span>: <strong>"+e.entries[i].dataPoint.y+"</strong><br/>";
+		total = e.entries[i].dataPoint.y + total;
+		str = str.concat(str1);
+	}
+	str2 = "<span style = \"color:DodgerBlue;\"><strong>"+(e.entries[0].dataPoint.x).getDay()+"</strong></span><br/>";// getFullYear()
+	total = Math.round(total * 100) / 100;
+	str3 = "<span style = \"color:Tomato\">Total:</span><strong> "+total+"</strong><br/>";
+	return (str2.concat(str)).concat(str3);
+}
+
+}
+</script>
+</head>
+<body onload="show();showArray();showpie();">
+<nav class="navbar navbar-default">
+
+<ul>
+  <li><a class="active" href="#"><i class="fa fa-bars"></i></a></li>
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Solutions</a></li>
+  <li><a href="#">Events</a></li>
+    <li><a href="#">About</a></li>
+  <li style="float:right"><img src="amdocsIcon.png" style="float:left;" id="amdocsIcon"></li>
+</ul>
+</nav>
+
+<h2>Amdocs Log System Status at data: dd/mm/yyyy</h2><br>
+
+
+
+
+  <div class="w3-row-padding" style="height: 200px; width: 100%;">
+    <div class="w3-third" >
+    <div id=d0>
+    
+<table id=t2   class="table"></table>
+    </div>
+    </div>
+        <div class="w3-third">
+    <div id=d1>
+    
+<table id=t1  class="table"></table>
+    </div>
+    </div>  
+      <div class="w3-third">
+    <div id=d2>
+    
+<table id=t3   class="table"></table>
+    </div>
+    </div>
+  </div>
+
+<div id="chartContainer" style="height: 300px; width: 50%;  float:left; "></div>
+<div id="a" style="height: 300px; width: 50%;  float:left; "></div>
+</body>
+</html>
