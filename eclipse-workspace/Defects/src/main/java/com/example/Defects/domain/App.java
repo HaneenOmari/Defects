@@ -1,37 +1,48 @@
 package com.example.Defects.domain;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class App {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	private String name,type;
 	public App() {
 		
 	}
-	
-	public App(String id, String name, String type) {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="app")
+    private List<DefectInstance> defectsInctanse;
+    //Getter and setter
+    public List<DefectInstance> getdefectsInctanse() {
+      return defectsInctanse;
+    }
+
+    public void setdefectsInctanse(List<DefectInstance> defectsinctanse) {
+      this.defectsInctanse = defectsinctanse;
+    }
+
+	public App(String name, String type) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.type = type;
 	}
-	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
-	private String name,type;
-	
+	public long getId() {
+		return id;	}
 
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
+//	public void setId(String id) {
+//		this.id = id;
+//	}
 
 	public String getName() {
 		return name;

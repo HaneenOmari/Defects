@@ -1,11 +1,13 @@
 package com.example.Defects.domain;
-
 import java.util.Date;
-
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.persistence.OneToMany;
 
 @Entity
 public class LogFile {
@@ -15,13 +17,13 @@ public class LogFile {
 	private long id;
 	private String name;
 	private Date date;
-	
+	  @OneToMany(cascade = CascadeType.ALL, mappedBy="file")
+	    private List<DefectInstance> defectsInctanse;
 	public LogFile() {
 	}
 	
-	public LogFile(long id, String name, Date date) {
+	public LogFile( String name, Date date) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.date = date;
 	}

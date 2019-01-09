@@ -1,10 +1,14 @@
 package com.example.Defects.domain;
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Solutions {
@@ -16,9 +20,11 @@ public class Solutions {
 	public Solutions() {
 		super();
 	}
-	public Solutions(long id, String name_solution, String description) {
+	
+	  @OneToMany(cascade = CascadeType.ALL, mappedBy="sol")
+	    private List<Defect> defect;
+	public Solutions( String name_solution, String description) {
 		super();
-		this.id = id;
 		this.name_solution = name_solution;
 		this.description = description;
 	}

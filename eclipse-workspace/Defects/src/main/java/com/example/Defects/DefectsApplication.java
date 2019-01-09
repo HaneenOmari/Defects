@@ -1,5 +1,9 @@
 package com.example.Defects;
+
 import java.util.ArrayList;
+import java.util.Date;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,12 +15,23 @@ import com.cmserver.ar.Reader;
 import com.cmserver.ar.Writer;
 import com.example.Defects.domain.App;
 import com.example.Defects.domain.AppRepository;
+import com.example.Defects.domain.Defect;
+import com.example.Defects.domain.DefectInstance;
+import com.example.Defects.domain.DefectRepository;
+import com.example.Defects.domain.Defect_InstanceRepository;
+import com.example.Defects.domain.LogFile;
+import com.example.Defects.domain.LogFileRepository;
 
 @SpringBootApplication
 public class DefectsApplication {
 	@Autowired
-	private AppRepository repository;
-
+	private AppRepository apprepository;
+	@Autowired
+	private DefectRepository defrepository;
+	@Autowired
+	private LogFileRepository logrepository;
+	@Autowired 
+	private Defect_InstanceRepository DIrepository;
 	private static ArrayList<Defects> defectsList;
 
 	public static void main(String[] args) {
@@ -25,17 +40,33 @@ public class DefectsApplication {
 
 	@Bean
 	CommandLineRunner runner() {
-		Writer writer = Reader.extracted("CMServer.20170924_1557.log");
-		defectsList = writer.getDefectsList();
+		String[] s= {"CMServer.20170924_1557.log","CMServer.20170914_2028.log"};
+		int numberOfLogs=s.length;
+		for(int k=0;k<numberOfLogs;k++)
+		{
+			Date date = new Date();
+			LogFile logfile= new LogFile(s[k],date);
+			logrepository.save(logfile);
+		Writer writer = Reader.extracted(s[k]);
+		defectsList = writer.getDefectsList();}
 		return args -> {
-			int id = 0;int i;
+			int i;
+			int j=0;
+		
 			for(Defects defect : defectsList ) {
-			//	App app = new App(defect.getApp() + i,defect.getCode(),defect.getSeverity());
+
 				i=defect.getApp().indexOf(" ");
-				App app = new App(id+" ",defect.getApp().substring(0, i),defect.getApp().substring(i+1,(defect.getApp().length()) ));
-				repository.save(app);
-				id++;
+				App app = new App(defect.getApp().substring(0, i),defect.getApp().substring(i+1,(defect.getApp().length()) ));
+				apprepository.save(app);
+				Defect d = new Defect(defect.getSeverity(),defect.getCode()," ");
+				defrepository.save(d);	
+			
+				DefectInstance DI = new DefectInstance(j++ ,  j++,  app,d,logfile);
+				DIrepository.save(DI);
+
+
 			}
+			
 		};
 	}
 }
