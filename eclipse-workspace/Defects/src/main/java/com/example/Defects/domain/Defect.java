@@ -29,7 +29,16 @@ public class Defect {
     @JoinColumn(name = "sol")
     private Solutions sol;
     
-    public Defect( String severity, String error_code, String id_sol,List<DefectInstance> defectsInctanse) {
+    public Defect(String severity, String error_code, String id_sol,Solutions sol) {
+		super();
+		this.severity = severity;
+		this.error_code = error_code;
+		this.id_sol = id_sol;
+		this.defectsInctanse = defectsInctanse;
+		this.sol = sol;
+	}
+
+	public Defect( String severity, String error_code, String id_sol,List<DefectInstance> defectsInctanse) {
 		super();
 		
 		this.severity = severity;

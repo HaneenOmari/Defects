@@ -8,13 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class DefectInstance {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id_Auto;
-	private long def_id;
 	private long id_log;
 	
 	public DefectInstance() {
@@ -30,27 +32,29 @@ public class DefectInstance {
 	  @ManyToOne(fetch = FetchType.LAZY)
       @JoinColumn(name = "file")
       private LogFile file;
-      public DefectInstance( long def_id, long id_log, App app, Defect def, LogFile logfile) {
+	  
+	    
+	    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+		@JsonIgnore
+      public DefectInstance(  long id_log, App app, Defect def, LogFile logfile) {
 		super();
-		this.def_id = def_id;
+	
 		this.id_log = id_log;
 		this.app = app;
 		this.def = def;
 		this.file = logfile;
 	}
 
-	public DefectInstance( long def_id, long id_log, App app, Defect def) {
+	public DefectInstance( long id_log, App app, Defect def) {
 		super();
 	
-		this.def_id = def_id;
 		this.id_log = id_log;
 		this.app = app;
 		this.def = def;
 	}
 
-	public DefectInstance(  long def_id, long id_log, App app) {
+	public DefectInstance(long id_log, App app) {
 		super();
-		this.def_id = def_id;
 		this.id_log = id_log;
 		this.app = app;
 	}
@@ -70,12 +74,7 @@ public class DefectInstance {
 		this.id_Auto = id_Auto;
 	}
 	
-	public long getDef_id() {
-		return def_id;
-	}
-	public void setDef_id(long def_id) {
-		this.def_id = def_id;
-	}
+
 	public long getId_log() {
 		return id_log;
 	}
